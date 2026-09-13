@@ -1,0 +1,459 @@
+/* ui/style.css */
+/* 
+================================================================================
+STUDENT PERFORMANCE ANALYSIS SYSTEM - MODERN GLASSMORPHIC UI DESIGN SYSTEM
+================================================================================
+Why this file exists:
+This CSS stylesheet styles the frontend dashboard. It transforms raw HTML elements 
+into a professional, responsive, and visually stunning web application. It is designed 
+with a "Glassmorphism" theme (popular in modern macOS/iOS designs) which features 
+translucent cards, dark-mode gradients, blur backdrops, and glowing accents.
+
+Viva/Technical Highlights:
+- CSS Custom Properties (Variables): Defined in :root to allow global palette adjustments.
+- Backdrop Filter: Applies a real-time blur to elements behind the translucent cards.
+- Flexbox & CSS Grid: Creates a fully responsive layout that fits mobiles, tablets, and desktops.
+- Transition Effects: Adds micro-animations to hover events, enhancing user interaction.
+*/
+
+/* Google Fonts Import - Using 'Inter' for premium modern typography */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* CSS VARIABLES (Global Styling Tokens) */
+:root {
+    --bg-gradient: linear-gradient(135deg, #0a0b10 0%, #0f111a 50%, #171926 100%);
+    --card-bg: rgba(26, 29, 46, 0.65);
+    --card-border: rgba(255, 255, 255, 0.07);
+    --text-primary: #f3f4f6;
+    --text-secondary: #9ca3af;
+    --primary-glow: #6366f1;
+    --primary-hover: #4f46e5;
+    --accent-emerald: #10b981;
+    --accent-emerald-hover: #059669;
+    --accent-rose: #f43f5e;
+    --accent-amber: #f59e0b;
+    --glass-blur: blur(16px);
+    --shadow-main: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* BASE RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary-glow) rgba(15, 17, 26, 0.5);
+}
+
+/* Custom Scrollbar for premium feel */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+::-webkit-scrollbar-track {
+    background: rgba(15, 17, 26, 0.5);
+}
+::-webkit-scrollbar-thumb {
+    background: var(--primary-glow);
+    border-radius: 4px;
+}
+
+body {
+    background: var(--bg-gradient);
+    color: var(--text-primary);
+    min-height: 100vh;
+    padding: 2rem;
+    overflow-x: hidden;
+    line-height: 1.5;
+}
+
+/* MAIN CONTAINER Layout */
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+/* HEADER SECTION (Title & Subtitle with glowing gradient) */
+header {
+    text-align: center;
+    padding: 2.5rem;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    backdrop-filter: var(--glass-blur);
+    border-radius: 20px;
+    box-shadow: var(--shadow-main);
+}
+
+header h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    letter-spacing: -0.05em;
+    background: linear-gradient(to right, #818cf8, #a78bfa, #f472b6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 0.5rem;
+}
+
+header p {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    font-weight: 400;
+}
+
+/* DASHBOARD GRID - Splits top area into upload & control components */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 2rem;
+}
+
+@media (max-width: 1024px) {
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* REUSABLE CARD CONTAINER */
+.card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    backdrop-filter: var(--glass-blur);
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: var(--shadow-main);
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    transition: var(--transition-smooth);
+}
+
+.card:hover {
+    border-color: rgba(99, 102, 241, 0.3);
+    box-shadow: 0 12px 40px 0 rgba(99, 102, 241, 0.1);
+}
+
+.card h2 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #fff;
+    border-left: 4px solid var(--primary-glow);
+    padding-left: 0.75rem;
+    line-height: 1.2;
+}
+
+/* FILE UPLOAD COMPONENT */
+.upload-zone {
+    border: 2px dashed rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+    padding: 2rem 1.5rem;
+    text-align: center;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.upload-zone:hover {
+    border-color: var(--primary-glow);
+    background: rgba(99, 102, 241, 0.05);
+}
+
+.upload-zone svg {
+    width: 48px;
+    height: 48px;
+    fill: var(--primary-glow);
+    margin-bottom: 1rem;
+    transition: var(--transition-smooth);
+}
+
+.upload-zone:hover svg {
+    transform: translateY(-5px);
+}
+
+.upload-zone p {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+}
+
+.upload-zone span {
+    display: block;
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.3);
+    margin-top: 0.5rem;
+}
+
+/* Hide raw file input */
+#file-input {
+    display: none;
+}
+
+/* BUTTONS GRID */
+.btn-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+}
+
+/* PRIMARY BUTTONS STYLE */
+.btn {
+    padding: 0.75rem 1.25rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    transition: var(--transition-smooth);
+}
+
+.btn-primary {
+    background: var(--primary-glow);
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background: var(--primary-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+}
+
+.btn-secondary {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-primary);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.btn-secondary:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+.btn-success {
+    background: var(--accent-emerald);
+    color: #fff;
+}
+
+.btn-success:hover:not(:disabled) {
+    background: var(--accent-emerald-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+}
+
+.btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    transform: none !important;
+    box-shadow: none !important;
+}
+
+/* STATUS CHIPS */
+.status-container {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: rgba(255, 255, 255, 0.03);
+    padding: 0.75rem 1.25rem;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.status-indicator {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--accent-rose);
+}
+
+.status-indicator.ready {
+    background: var(--accent-emerald);
+    box-shadow: 0 0 10px var(--accent-emerald);
+}
+
+.status-text {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+/* PREVIEW SECTIONS & TABLES */
+.preview-container {
+    overflow-x: auto;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 0.9rem;
+    background: rgba(20, 22, 36, 0.4);
+}
+
+th {
+    background: rgba(99, 102, 241, 0.1);
+    color: #fff;
+    padding: 1rem;
+    font-weight: 600;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+td {
+    padding: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    color: var(--text-secondary);
+}
+
+tr:hover {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+/* METRICS PANEL */
+.metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+}
+
+.metric-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-align: center;
+    transition: var(--transition-smooth);
+}
+
+.metric-card:hover {
+    background: rgba(255, 255, 255, 0.04);
+    transform: scale(1.03);
+}
+
+.metric-value {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--primary-glow);
+    margin-bottom: 0.25rem;
+}
+
+.metric-label {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* LOADER ANIMATION */
+.loader-wrapper {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    padding: 3rem;
+}
+
+.loader {
+    width: 48px;
+    height: 48px;
+    border: 5px solid rgba(255, 255, 255, 0.1);
+    border-bottom-color: var(--primary-glow);
+    border-radius: 50%;
+    animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.loader-text {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+/* VISUAL ANALYTICAL CHARTS & GRAPHS */
+.chart-wrapper {
+    background: rgba(15, 17, 26, 0.6);
+    border: 1px solid var(--card-border);
+    border-radius: 16px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    backdrop-filter: var(--glass-blur);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    margin-bottom: 1rem;
+}
+
+.chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.chart-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #fff;
+    border-left: 3px solid var(--accent-emerald);
+    padding-left: 0.5rem;
+}
+
+.chart-canvas-container {
+    position: relative;
+    max-height: 380px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+/* SERVER OFFLINE ALERT CARD */
+.offline-card {
+    background: rgba(244, 63, 94, 0.08);
+    border: 1px solid rgba(244, 63, 94, 0.3);
+    border-radius: 12px;
+    padding: 1rem 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.offline-title {
+    font-weight: 600;
+    color: var(--accent-rose);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.95rem;
+}
+
+.offline-text {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.4;
+}
+
+.retry-btn {
+    align-self: flex-start;
+    margin-top: 0.25rem;
+    padding: 0.4rem 0.9rem;
+    font-size: 0.8rem;
+}
+
+/* FOOTER */
+footer {
+    text-align: center;
+    color: rgba(255, 255, 255, 0.2);
+    font-size: 0.8rem;
+    margin-top: 1rem;
+}
